@@ -1,0 +1,20 @@
+sudo: required
+
+services:
+  - docker
+
+notifications:
+  email: false
+
+before_deploy:
+  - ./generate-pdf.sh
+
+deploy:
+  provider: releases
+  api_key: $GITHUB_TOKEN
+  file: "monografia.pdf"
+  skip_cleanup: true
+  overwrite: true
+  on:
+    repo: andreformento/tcc-engenharia
+    tags: true
